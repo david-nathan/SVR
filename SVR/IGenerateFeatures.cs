@@ -10,7 +10,12 @@ namespace SVR
     {
     }
 
-    interface IGenerateFeaturesFromFile : IGenerateFeatures
+    public class GenerateFeaturesFromFile : IGenerateFeatures
+    {
+
+    }
+
+    public class GenerateFeaturesFromStream : IGenerateFeatures
     {
 
     }

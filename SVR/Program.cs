@@ -14,6 +14,48 @@ namespace SVR
     class Program
     {
 
+        static void Main(string[] args)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         private static readonly int INPUT_DIMENSION = 749;
 
         static void Main(string[] args)
@@ -88,9 +130,14 @@ namespace SVR
 
                         //Write answer to console
                         Console.WriteLine("\nResult: {0}",fxy);
+
+                        const string fileName = "machine.dat";
+                        System.IO.Stream fileStream = new FileStream(fileName, FileMode.Create);
+                        machine.Save(fileStream);
                     }
                 }
             } while (cki.Key != ConsoleKey.X);           
-        }
+        }*/
     }
+          
 }
