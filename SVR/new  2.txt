@@ -1,0 +1,19 @@
+ data = read_mixed_csv('Rosey-Clover RFID test Thursday 20th Feb(2).csv',',');
+ 
+ rows_p1 = find(strcmp(data(:,2),'00155735'));
+  rows_p2 = find(strcmp(data(:,2),'00155680'));
+  
+  sigA_p1 =cell2mat(cellfun(@(x)str2num(x),data(rows_p1,5),'UniformOutput',false));
+  sigA_p2 =cell2mat(cellfun(@(x)str2num(x),data(rows_p2,5),'UniformOutput',false));
+  sigB_p2 =cell2mat(cellfun(@(x)str2num(x),data(rows_p2,6),'UniformOutput',false));
+  sigB_p1 =cell2mat(cellfun(@(x)str2num(x),data(rows_p1,6),'UniformOutput',false));
+  
+  time_p1 = datenum(data(rows_p1,1),'yyyy/mm/dd HH:MM:SS.FFF');
+  
+  plot(time_p1,sigA_p1);
+  datetick('x',13);
+  xlim([time_p1(1) time_p1(end)]);
+  
+ xa = find(sigA_p1 ~= -1); xb = find(sigB_p1 ~= -1);
+ hold on; grid on; plot(time_p1(xa),sigA_p1(xa),'b'); plot(time_p1(xb),sigB_p1(xb),'r');
+ set(gca,'XTick',linspace(time_p1(1),time_p1(end),10));  datetick('x',13,'keepticks');  xlim([time_p1(1) time_p1(end)]);

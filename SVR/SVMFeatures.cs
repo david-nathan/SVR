@@ -8,29 +8,6 @@ namespace SVR
 {
 
     /// <summary>
-    ///  Abstract class for the set of values that represent Skeletal Data returned by Kinect.
-    /// </summary>
-    public abstract class FrameFeatures
-    {
-
-        [Flags]
-        public enum DimensionType { X = 0, Y = 1, Z = 2}
-
-        [Flags]
-        public virtual enum JointType
-        {
-            HipCenter = 0, Spine = 1, ShoulderCenter = 2, Head = 4,
-            ShoulderLeft = 8, ElbowLeft = 16, WristLeft = 32, HandLeft = 64,
-            ShoulderRight = 128, ElbowRight = 256, WristRight = 512, HandRight = 1024,
-            HipLeft = 2048, KneeLeft = 4096, AnkleLeft = 8192, FootLeft = 16384,
-            HipRight = 32768, KneeRight = 65536, AnkleRight = 131072, FootRight = 262144,
-        }
-
-
-    }
-
-
-    /// <summary>
     /// Abtract class for the feature set used in the SVM Prediction.
     /// Note: When Dimension type X and Y are used concurrently with Feature type Joint Angle,
     /// they represent the Roll and Pitch respectively. 
@@ -48,18 +25,18 @@ namespace SVR
                                    HipLeft = 2048, KneeLeft = 4096, AnkleLeft = 8192, FootLeft = 16384,
                                    HipRight = 32768,  KneeRight = 65536, AnkleRight = 131072, FootRight =262144,
 
-                                   Shoulder = ShoulderLeft & ShoulderRight, Elbow = ElbowLeft & ElbowRight,
-                                   Wrist = WristLeft & WristRight, Hand = HandLeft & HandRight,
-                                   Hip = HipLeft & HipRight, Knee = KneeLeft & KneeRight,
-                                   Ankle= AnkleLeft & AnkleRight, Foot = FootLeft & FootRight,
+                                   Shoulder = ShoulderLeft | ShoulderRight, Elbow = ElbowLeft | ElbowRight,
+                                   Wrist = WristLeft | WristRight, Hand = HandLeft | HandRight,
+                                   Hip = HipLeft | HipRight, Knee = KneeLeft | KneeRight,
+                                   Ankle= AnkleLeft | AnkleRight, Foot = FootLeft | FootRight,
 
-                                   LeftArm = ShoulderLeft & ElbowLeft & WristLeft & HandLeft,
-                                   RightArm = ShoulderRight & ElbowRight & WristRight & HandRight,
-                                   UpperBody = Spine & ShoulderCenter & Head & LeftArm  & RightArm,
-                                   LeftLeg = HipLeft & KneeLeft & AnkleLeft & FootLeft,
-                                   RightLeg = HipRight & KneeRight & AnkleRight & FootRight,
-                                   LowerBody = HipCenter & LeftLeg & RightLeg,
-                                   TotalBody = LowerBody & UpperBody} 
+                                   LeftArm = ShoulderLeft | ElbowLeft | WristLeft | HandLeft,
+                                   RightArm = ShoulderRight | ElbowRight | WristRight | HandRight,
+                                   UpperBody = Spine | ShoulderCenter | Head | LeftArm  | RightArm,
+                                   LeftLeg = HipLeft | KneeLeft | AnkleLeft | FootLeft,
+                                   RightLeg = HipRight | KneeRight | AnkleRight | FootRight,
+                                   LowerBody = HipCenter | LeftLeg | RightLeg,
+                                   TotalBody = LowerBody | UpperBody} 
 
         /// <summary>
         /// AVG = Average
